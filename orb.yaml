@@ -1,5 +1,8 @@
 version: 2.1
 description: An orb to publish a Python package to Google Artifact Registry
+display:
+  home_url: "https://www.noyo.com/"
+  source_url: "https://github.com/noyo-technologies/gcp-pypi-orb"
 
 orbs:
   orb-tools: circleci/orb-tools@9.1.1
