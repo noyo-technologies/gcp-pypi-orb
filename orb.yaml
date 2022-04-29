@@ -94,7 +94,7 @@ jobs:
           description: The location of the Google Artifact Registry to upload packages to.
           type: env_var_name
         google-gcloud-version:
-          default: 354.0.0
+          default: 383.0.1
           description: The version number of the gcloud CLI to install and use
           type: string
         before-build-steps:
