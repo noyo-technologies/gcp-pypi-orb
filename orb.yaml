@@ -46,7 +46,7 @@ commands:
         description: The steps to run to upload the python packages
         type: steps
         default:
-          - run: pip install twine
+          - run: pip install twine keyrings.google-artifactregistry-auth
           - run: twine upload dist/* --verbose --config-file .pypirc --repository $(cat .pypi-repository)
     steps:
       - orb-tools/check-env-var-param:
@@ -134,7 +134,7 @@ jobs:
           description: The steps to run to upload the python packages
           type: steps
           default:
-            - run: pip install twine
+            - run: pip install twine keyrings.google-artifactregistry-auth
             - run: twine upload dist/* --verbose --config-file .pypirc --repository $(cat .pypi-repository)
         after-publish-steps:
           description: Steps to execute after publishing
