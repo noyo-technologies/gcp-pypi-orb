@@ -142,9 +142,8 @@ jobs:
           default: []
     steps:
       - checkout
-      - gcp-cli/install:
-          version: << parameters.google-gcloud-version >>
       - gcp-cli/setup:
+          version: << parameters.google-gcloud-version >>
           gcloud_service_key: << parameters.gcloud-service-key >>
           google_compute_region: << parameters.google-compute-region >>
           google_compute_zone: << parameters.google-compute-zone >>
