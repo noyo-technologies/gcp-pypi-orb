@@ -6,7 +6,7 @@ display:
 
 orbs:
   orb-tools: circleci/orb-tools@9.1.1
-  gcp-cli: circleci/gcp-cli@2.1.0
+  gcp-cli: circleci/gcp-cli@3.1.0
 
 executors:
   default:
@@ -93,8 +93,24 @@ jobs:
           default: GOOGLE_LOCATION
           description: The location of the Google Artifact Registry to upload packages to.
           type: env_var_name
+        use-oidc:
+          default: false
+          description: Use oidc for authentication.
+          type: boolean
+        service-account-email:
+          default: OIDC_SERVICE_ACCOUNT_EMAIL
+          description: Service account email to use for oidc authentication.
+          type: env_var_name
+        workload-identity-pool-id:
+          default: OIDC_WIP_ID
+          description: Name of the workload identity pool used for oidc authentication.
+          type: env_var_name
+        workload-identity-pool-provider-id:
+          default: OIDC_WIP_PROVIDER_ID
+          description: Workload identity pool provider ID used for oidc authentication.
+          type: env_var_name
         google-gcloud-version:
-          default: 383.0.1
+          default: 415.0.0
           description: The version number of the gcloud CLI to install and use
           type: string
         before-build-steps:
@@ -128,11 +144,15 @@ jobs:
       - checkout
       - gcp-cli/install:
           version: << parameters.google-gcloud-version >>
-      - gcp-cli/initialize:
-          gcloud-service-key: <<parameters.gcloud-service-key>>
-          google-compute-region: <<parameters.google-compute-region>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-          google-project-id: <<parameters.google-project-id>>
+      - gcp-cli/setup:
+          gcloud-service-key: << parameters.gcloud-service-key >>
+          google-compute-region: << parameters.google-compute-region >>
+          google-compute-zone: << parameters.google-compute-zone >>
+          google-project-id: << parameters.google-project-id >>
+          use_oidc: << parameters.use-oidc >>
+          service_account_email: << parameters.service-account-email >>
+          workload_identity_pool_id: << parameters.workload-identity-pool-id >>
+          workload_identity_pool_provider_id: << parameters.workload-identity-pool-provider-id >>
       - steps: << parameters.before-build-steps >>
       - build:
           build-steps: << parameters.build-steps >>
