@@ -145,10 +145,10 @@ jobs:
       - gcp-cli/install:
           version: << parameters.google-gcloud-version >>
       - gcp-cli/setup:
-          gcloud-service-key: << parameters.gcloud-service-key >>
-          google-compute-region: << parameters.google-compute-region >>
-          google-compute-zone: << parameters.google-compute-zone >>
-          google-project-id: << parameters.google-project-id >>
+          gcloud_service_key: << parameters.gcloud-service-key >>
+          google_compute_region: << parameters.google-compute-region >>
+          google_compute_zone: << parameters.google-compute-zone >>
+          google_project_id: << parameters.google-project-id >>
           use_oidc: << parameters.use-oidc >>
           service_account_email: << parameters.service-account-email >>
           workload_identity_pool_id: << parameters.workload-identity-pool-id >>
